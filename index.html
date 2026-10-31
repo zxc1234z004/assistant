@@ -480,7 +480,7 @@
             const pass = document.getElementById('l-pass').value.trim();
             if (!email || !pass) return showToast('請輸入信箱與密碼', true);
             const btn = document.getElementById('btn-login'); setBtnLoading(btn, true, '驗證中...');
-            const res = await api('loginUser', { email, password: pass });
+            const res = await api('loginStaff', { email, password: pass });
             setBtnLoading(btn, false);
             if (res.success && res.userData) {
                 const u = res.userData;
@@ -499,7 +499,7 @@
             const instrument = document.getElementById('r-instrument').value;
             if (!name || !email || !pass) return showToast('請填寫所有欄位', true);
             const btn = document.getElementById('btn-register'); setBtnLoading(btn, true, '申請中...');
-            const res = await api('registerUser', { name, email, password: pass, section: '行政組', instrument });
+            const res = await api('registerStaff', { name, email, password: pass, section: '行政組', instrument });
             setBtnLoading(btn, false);
             if (res.success) { showToast('帳號申請成功！請使用新帳密登入'); setAuthMode('login'); document.getElementById('l-email').value = email; }
             else showToast(res.message || '申請失敗', true);
@@ -721,7 +721,7 @@
             }
 
             setBtnLoading(btn, true, '正在儲存...');
-            const res = await api('saveMember', { email: curUser.Email, phone, birthday, idNumber, password, privacyConsent });
+            const res = await api('saveStaff', { email: curUser.Email, phone, birthday, idNumber, password, privacyConsent });
             setBtnLoading(btn, false);
 
             if (res.success) {
